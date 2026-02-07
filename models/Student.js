@@ -22,7 +22,7 @@ const studentSchema = new mongoose.Schema({
     studentLoginId: { 
         type: String, 
         required: [true, "Login ID is required"], 
-        unique: true,
+        unique: true, // Auto-indexes the field
         trim: true 
     },
     password: { 
@@ -40,7 +40,7 @@ const studentSchema = new mongoose.Schema({
     coachingId: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Coaching',
-        required: true // Har student kisi coaching se juda hona chahiye
+        required: true 
     },
     teacherId: { 
         type: mongoose.Schema.Types.ObjectId, 
@@ -50,7 +50,6 @@ const studentSchema = new mongoose.Schema({
         type: String, 
         default: '' 
     },
-    // --- Fee & Dashboard Related Fields ---
     joiningDate: {
         type: Date,
         required: [true, "Joining date is required"],
@@ -72,7 +71,6 @@ const studentSchema = new mongoose.Schema({
 });
 
 // Indexing for faster searches
-studentSchema.index({ studentLoginId: 1 });
 studentSchema.index({ coachingId: 1 });
 
 module.exports = mongoose.model('Student', studentSchema);
